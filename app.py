@@ -499,50 +499,53 @@ if uploaded_file is not None:
             - Consider trade-offs between high recall vs. precision.
             """)
 
-    # ==============================================
-    # 📘 Challenges Faced & Learning Reflection
-    # ==============================================
-    st.subheader("📘 Challenges Faced & Key Reflections")
-    
-    # 8.1 Common Challenges
-    st.markdown("### 🔧 Common Challenges")
-    
-    st.markdown("""
-    - **Dataset Cleaning:**  
-      The original dataset was stored as a single tab-separated column.  
-      ✔️ Resolved using `sep='\\t'` in `pd.read_csv()`.
-    
-    - **Missing Values:**  
-      24 missing entries were found in the `Income` column.  
-      ✔️ Dropped them to ensure reliable modeling.
-    
-    - **High Dimensionality (from Categorical Encoding):**  
-      One-hot encoding introduced many new features.  
-      ✔️ Managed through careful preprocessing and feature selection.
-    
-    - **Imbalanced Target Variable (`Response`):**  
-      The dataset had more non-responders (0) than responders (1).  
-      ✔️ Evaluated models using precision, recall, and F1-score instead of just accuracy.
-    
-    - **Choosing Number of Clusters:**  
-      Initially uncertain about optimal cluster count.  
-      ✔️ Used 3 clusters based on domain logic and PCA separation.
-    
-    - **Association Rule Mining Issue:**  
-      Raw spending values couldn't be directly used in Apriori.  
-      ✔️ Converted to binary format (1 = purchased) before applying the algorithm.
-    """)
-    
-    # 8.2 Reflections
-    st.markdown("### 🎓 Reflections & Learning Outcomes")
-    
-    st.markdown("""
-    - Gained practical experience in **data preprocessing, cleaning, and feature engineering**.
-    - Applied and interpreted both **unsupervised (KMeans)** and **supervised (classification)** models.
-    - Understood how **association rules** can support product bundling strategies.
-    - Saw the power of **PCA, heatmaps, and 3D plots** in communicating insights visually.
-    - Collaborated effectively as a team by dividing roles in **data prep, modeling, and interpretation**.
-    """)
+
+
+# ==============================================
+# 📘 Challenges Faced & Learning Reflection
+# ==============================================
+st.subheader("📘 Challenges Faced & Key Reflections")
+
+# 8.1 Common Challenges
+st.markdown("### 🔧 Common Challenges")
+
+st.markdown("""
+- **Dataset Cleaning:**  
+  The original dataset was stored as a single tab-separated column.  
+  ✔️ Resolved using `sep='\\t'` in `pd.read_csv()`.
+
+- **Missing Values:**  
+  24 missing entries were found in the `Income` column.  
+  ✔️ Dropped them to ensure reliable modeling.
+
+- **High Dimensionality (from Categorical Encoding):**  
+  One-hot encoding introduced many new features.  
+  ✔️ Managed through careful preprocessing and feature selection.
+
+- **Imbalanced Target Variable (`Response`):**  
+  The dataset had more non-responders (0) than responders (1).  
+  ✔️ Evaluated models using precision, recall, and F1-score instead of just accuracy.
+
+- **Choosing Number of Clusters:**  
+  Initially uncertain about optimal cluster count.  
+  ✔️ Used 3 clusters based on domain logic and PCA separation.
+
+- **Association Rule Mining Issue:**  
+  Raw spending values couldn't be directly used in Apriori.  
+  ✔️ Converted to binary format (1 = purchased) before applying the algorithm.
+""")
+
+# 8.2 Reflections
+st.markdown("### 🎓 Reflections & Learning Outcomes")
+
+st.markdown("""
+- Gained practical experience in **data preprocessing, cleaning, and feature engineering**.
+- Applied and interpreted both **unsupervised (KMeans)** and **supervised (classification)** models.
+- Understood how **association rules** can support product bundling strategies.
+- Saw the power of **PCA, heatmaps, and 3D plots** in communicating insights visually.
+- Collaborated effectively as a team by dividing roles in **data prep, modeling, and interpretation**.
+""")
+
 
 
 
