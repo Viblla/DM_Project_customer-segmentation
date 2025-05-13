@@ -202,12 +202,28 @@ if uploaded_file is not None:
         axs[i].set_title(f"{col} Distribution")
     plt.tight_layout()
     st.pyplot(fig)
+    # Explanation for histogram
+    st.markdown("""
+    **🧾 About Spending Histograms**  
+    - Shows how frequently customers purchase each product category.  
+    - Skewness or clustering indicates popular vs. niche spending behavior.  
+    - Helps understand customer preferences by product type.
+    """)
+
 
     # Heatmap
     st.markdown("### 🔥 Correlation Heatmap")
     fig, ax = plt.subplots(figsize=(10, 6))
     sns.heatmap(df_encoded[spending_cols + ['Income']].corr(), annot=True, cmap='coolwarm', ax=ax)
     st.pyplot(fig)
+
+    st.markdown("""
+    **🔍 About Correlation Heatmap**  
+    - Displays correlation between income and spending variables.  
+    - Strong positive values show high co-purchase behavior.  
+    - Useful to detect bundled buying or related preferences.
+    """)
+
 
     # Bar Plots
     st.subheader("🎯 Campaign Response by Category")
@@ -219,6 +235,14 @@ if uploaded_file is not None:
     plt.xticks(rotation=45)
     st.pyplot(fig)
 
+    st.markdown("""
+    **🎓 Interpretation of Education Response Barplot**  
+    - Highlights how education level influences marketing campaign response.  
+    - Bars show average response rate per education group.  
+    - Helps tailor messaging for target demographics.
+    """)
+
+
     st.markdown("#### 💍 Response Rate by Marital Status")
     marital_response = df.groupby("Marital_Status")["Response"].mean().sort_values()
     fig, ax = plt.subplots()
@@ -227,12 +251,27 @@ if uploaded_file is not None:
     plt.xticks(rotation=45)
     st.pyplot(fig)
 
+    st.markdown("""
+    **💑 Interpretation of Marital Status Response Barplot**  
+    - Compares campaign engagement across relationship types.  
+    - Identifies which demographic is more receptive to promotions.
+    """)
+
+
     # Boxplot
     st.subheader("📦 Spending Patterns by Product Category")
     fig, ax = plt.subplots(figsize=(10, 6))
     sns.boxplot(data=df[spending_cols], ax=ax)
     plt.xticks(rotation=45)
     st.pyplot(fig)
+
+    st.markdown("""
+    **📦 About Boxplot of Product Spending**  
+    - Shows distribution and variability in customer spending.  
+    - Boxes indicate interquartile range; dots show outliers.  
+    - Helps find which products have consistent vs. erratic purchases.
+    """)
+
 
     # ==============================================
     # 🔍 3D Plot: Customer Distribution by Response
@@ -254,6 +293,14 @@ if uploaded_file is not None:
     ax.set_zlabel("Customer Since Days")
     ax.set_title("Customer Distribution by Response (3D View)")
     st.pyplot(fig)
+
+    st.markdown("""
+    **📌 About 3D Customer Response View**  
+    - Shows customer response (red = yes, blue = no) in relation to income, recency, and tenure.  
+    - Reveals patterns in response likelihood.  
+    - Helpful for visualizing segmentation impact.
+    """)
+
 
 
     # ==============================================
@@ -297,6 +344,14 @@ if uploaded_file is not None:
     plt.title('Association Rules: Support vs Confidence')
     st.pyplot(fig)
 
+    st.markdown("""
+    **📈 About Support vs. Confidence Plot**  
+    - Each point is a product rule (if buy X → then buy Y).  
+    - Higher support = more frequent combo; higher confidence = more reliable rule.  
+    - Color intensity = lift (strength of the rule).
+    """)
+
+
     # 3D Plot – Association Rule Metrics
 
     st.subheader("📊 3D Plot of Association Rules")
@@ -309,6 +364,12 @@ if uploaded_file is not None:
     ax.set_zlabel("Lift")
     ax.set_title("3D Plot of Association Rules")
     st.pyplot(fig)
+
+    st.markdown("""
+    **🧠 About 3D Association Rule View**  
+    - Adds a third dimension (Lift) to better compare rule strength.  
+    - Useful when evaluating multiple bundling strategies together.
+    """)
 
 
 
@@ -430,6 +491,14 @@ if uploaded_file is not None:
             plt.ylim(0, 1)
             plt.title("Comparison of Classifier Performance")
             st.pyplot(fig)
+
+            st.markdown("""
+            **📊 Interpreting Classifier Comparison Chart**  
+            - Compares multiple model scores on Accuracy, Precision, Recall, and F1 Score.  
+            - Helps pick best model for campaign prediction.  
+            - Consider trade-offs between high recall vs. precision.
+            """)
+
 
 
 
