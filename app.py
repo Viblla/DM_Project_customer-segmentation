@@ -113,19 +113,29 @@ if uploaded_file is not None:
     st.write("📌 Cluster Group Summary")
     st.dataframe(df.groupby("Cluster")[features].mean())
 
-    # PCA for visualization
-    st.subheader("🖼️ 2D Cluster Visualization")
-    pca = PCA(n_components=2)
-    pca_result = pca.fit_transform(scaled)
+    # 📊 Updated 2D Cluster Visualization (Notebook Style)
+    st.subheader("🖼️ 2D Cluster Visualization (Notebook Style)")
+    
+    # Prepare PCA result
     df['PCA1'] = pca_result[:, 0]
     df['PCA2'] = pca_result[:, 1]
     
     fig, ax = plt.subplots(figsize=(10, 6))
-    sns.scatterplot(data=df, x='PCA1', y='PCA2', hue='Cluster', palette='Set2', s=80, edgecolor='black', alpha=0.7, ax=ax)
-    ax.set_title("Customer Segments by PCA Components")
-    ax.set_xlabel("PCA Component 1")
-    ax.set_ylabel("PCA Component 2")
+    sns.scatterplot(data=df, x='PCA1', y='PCA2', hue='Cluster', palette='Set2', ax=ax)
+    ax.set_title("Customer Segments Visualized with PCA (2D)")
+    ax.set_xlabel("PCA 1")
+    ax.set_ylabel("PCA 2")
+    ax.legend(title='Cluster')
     st.pyplot(fig)
+    
+    # Add Explanation Below the Graph
+    st.markdown("""
+    **About the Plot:**  
+    - PCA (Principal Component Analysis) reduces the dimensionality of the data to help visualize clusters.  
+    - Each point represents a customer, and the colors represent clusters identified by the KMeans algorithm.  
+    - This visualization helps interpret segment boundaries and density of groupings.  
+    """)
+
 
 
     # 3D PCA Plot – Customer Segments
