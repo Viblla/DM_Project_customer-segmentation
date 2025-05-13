@@ -101,45 +101,53 @@ if uploaded_file is not None:
     # 📊 STEP 3: Clustering (KMeans)
     # ==============================================
     st.subheader("📊 Customer Segmentation (KMeans Clustering)")
+    
+    # Define features based on notebook
     features = ['Income', 'Recency', 'Customer_Since_Days',
-                'MntWines', 'MntMeatProducts', 'MntGoldProds']
-
+                'MntWines', 'MntMeatProducts', 'MntFishProducts',
+                'MntSweetProducts', 'MntGoldProds',
+                'NumWebPurchases', 'NumCatalogPurchases', 'NumStorePurchases']
+    
+    # Standardize features
     scaler = StandardScaler()
-    scaled = scaler.fit_transform(df[features])
-
+    X_scaled = scaler.fit_transform(df[features])
+    
+    # KMeans clustering
     kmeans = KMeans(n_clusters=3, random_state=42)
-    df['Cluster'] = kmeans.fit_predict(scaled)
-
+    df['Cluster'] = kmeans.fit_predict(X_scaled)
+    
     st.write("📌 Cluster Group Summary")
     st.dataframe(df.groupby("Cluster")[features].mean())
-
-    # 📊 Updated 2D Cluster Visualization (Notebook Style)
-    # PCA for visualization
     
+    # ==============================================
+    # 🌍 2D Cluster Visualization (Notebook Style)
+    # ==============================================
+    from sklearn.decomposition import PCA
+    
+    st.subheader("🌍 2D Cluster Visualization")
+    
+    # Apply PCA
     pca = PCA(n_components=2)
-    pca_result = pca.fit_transform(scaled)
+    pca_components = pca.fit_transform(X_scaled)
     
-    # Attach PCA results to DataFrame BEFORE plotting
-    df['PCA1'] = pca_result[:, 0]
-    df['PCA2'] = pca_result[:, 1]
-    
-    # ✅ 2D Plot – Notebook Style
-    st.subheader("🌍 2D Cluster Visualization (Notebook Style)")
-    
+    # Plot
     fig, ax = plt.subplots(figsize=(10, 6))
-    sns.scatterplot(data=df, x='PCA1', y='PCA2', hue='Cluster', palette='Set2', ax=ax)
+    sns.scatterplot(x=pca_components[:, 0], y=pca_components[:, 1], hue=df['Cluster'], palette='Set2', ax=ax)
     ax.set_title("Customer Segments Visualized with PCA (2D)")
     ax.set_xlabel("PCA 1")
     ax.set_ylabel("PCA 2")
     ax.legend(title='Cluster')
     st.pyplot(fig)
     
+    # Explanation
     st.markdown("""
-    **About the Plot:**  
-    - PCA (Principal Component Analysis) reduces multiple dimensions into two for visualization.  
-    - Each dot is a customer, grouped by their cluster color.  
-    - Helps quickly identify the separation between customer segments.
+    **🧠 About PCA Plot**  
+    - PCA (Principal Component Analysis) reduces multi-dimensional data into 2D.  
+    - Each point represents a customer.  
+    - Color indicates the customer cluster assigned by KMeans.  
+    - This helps us visualize group behavior patterns and separability in a simplified 2D space.
     """)
+
 
 
 
