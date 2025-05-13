@@ -47,6 +47,10 @@ custom_style = f"""
 st.markdown(custom_style, unsafe_allow_html=True)
 
 st.title("📊 Customer Behavior Analytics Dashboard")
+st.markdown("""
+<span style='font-size:18px; font-weight:500;'>👥 <b>Members:</b> Ahmed Bilal Nazim & Ahmed Ali Khan</span>
+""", unsafe_allow_html=True)
+
 
 # Set global Seaborn and Matplotlib style
 sns.set_style(sns_theme)
