@@ -113,11 +113,16 @@ if uploaded_file is not None:
     st.subheader("🖼️ 2D Cluster Visualization")
     pca = PCA(n_components=2)
     pca_result = pca.fit_transform(scaled)
-    fig, ax = plt.subplots()
-    sns.scatterplot(x=pca_result[:, 0], y=pca_result[:, 1], hue=df['Cluster'], palette='Set2', ax=ax)
-    plt.xlabel("PCA Component 1")
-    plt.ylabel("PCA Component 2")
+    df['PCA1'] = pca_result[:, 0]
+    df['PCA2'] = pca_result[:, 1]
+    
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.scatterplot(data=df, x='PCA1', y='PCA2', hue='Cluster', palette='Set2', s=80, edgecolor='black', alpha=0.7, ax=ax)
+    ax.set_title("Customer Segments by PCA Components")
+    ax.set_xlabel("PCA Component 1")
+    ax.set_ylabel("PCA Component 2")
     st.pyplot(fig)
+
 
     # 3D PCA Plot – Customer Segments
     from mpl_toolkits.mplot3d import Axes3D  # Ensure this import is at top
