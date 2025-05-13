@@ -149,21 +149,41 @@ if uploaded_file is not None:
     """)
 
 
-
-
-
-    # 3D PCA Plot – Customer Segments
-    from mpl_toolkits.mplot3d import Axes3D  # Ensure this import is at top
-
+    # ==============================================
+    # 🔭 3D View of Customer Segments (Notebook Style)
+    # ==============================================
+    from mpl_toolkits.mplot3d import Axes3D  # Ensure this import is at the top
+    
     st.subheader("🔭 3D View of Customer Segments")
+    
     fig = plt.figure(figsize=(8, 6))
     ax = fig.add_subplot(111, projection='3d')
-    ax.scatter(pca_result[:, 0], pca_result[:, 1], df["Customer_Since_Days"], c=df["Cluster"], cmap='viridis')
-    ax.set_xlabel("PCA 1")
-    ax.set_ylabel("PCA 2")
+    
+    # Use PCA components from earlier
+    ax.scatter(
+        pca_components[:, 0],
+        pca_components[:, 1],
+        df["Customer_Since_Days"],
+        c=df["Cluster"],
+        cmap='Set2',
+        s=50,
+        alpha=0.6
+    )
+    
+    ax.set_xlabel("PCA Component 1")
+    ax.set_ylabel("PCA Component 2")
     ax.set_zlabel("Customer Since Days")
     ax.set_title("3D View of Customer Segments")
     st.pyplot(fig)
+    
+    # Explanation
+    st.markdown("""
+    **🧠 About 3D Cluster Plot**  
+    - The X and Y axes are the PCA components used to reduce dimensionality.  
+    - The Z-axis shows how long a customer has been with the company.  
+    - Colors represent KMeans clusters, helping visualize group trends in 3D space.
+    """)
+
 
 
     # ==============================================
